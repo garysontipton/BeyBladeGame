@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head> 
 <!-- <script src="http://pixelscommander.com/polygon/spinner/node_modules/Propeller/dist/propeller.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -39,8 +39,8 @@ html, body {
         }
 
         .spinner {
-            max-width: 20%;
-            width: 20%;
+            max-width: 160px;
+            width: 160px;
             height: auto;
             position: absolute;
             top: 100px;
@@ -67,47 +67,27 @@ html, body {
             text-shadow: -3px 0 white, 0 3px white, 3px 0 white, 0 -3px white;
         }
 
-#main{
-    border: 1px solid black;
-    position: relative;
-    width: 200px;
-    height: 200px;
-}
-#test {
-    border: 1px solid red;
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    width: 100px;
-    height: 100px;
-    
-}
-
 </style>
 </head>
 <body>
-    <h1>pw:hint a dog ate something yummy bang </h1>
-    <div id="main">
-        <div id="test" class="test"></div>
-    </div>
-    <p><button id="button">Test</a></button>
-
+    <div style="width: 100%; overflow: hidden;">
+        <div style="width: 150px; float: left; white-space: nowrap;"> <h2>Counter:</h2> </div>
+        <div style="width: 40px; margin-left: 160px; white-space: nowrap;"> <h2 id="counter">0</h2> </div>
+        <div style="margin-left: 250px; white-space: nowrap;"> <button id="button">Test</button> </div>
+    </div>  
+    <!-- <div class="speed-plane"></div> -->
 
 <div ng-app="">
-
-<p>Input the name of your beyblade in the box:</p>
-<p> <input type="text" ng-model="name" placeholder="Enter name here"></p>
-<h1>GO! {{name}}  </h1>
-<div class="speed-plane">
-    <h2>Max speed:</h2>
-    <h1 id="speed">0</h1>
-</div>    
 </div>
 
 <img Id="pegasusspinner" class="spinner" src="pegasusBeyblade.jfif" ondblclick="Javascript:spinme(this)">
 
 
 <script>
+
+// #Global Var
+var newDuration = Math.floor(Math.random()*5000);
+var globalCounter = 0;
 
 function myFunction(myid) {
   document.getElementById(myid).style.left = "500px";
@@ -123,54 +103,46 @@ function spinme(aobj) {
   rotation();
   movespinner(aobj, 0);
 }
+
 function movespinner(aobj, cntr) {
 
   var newTop = Math.floor(Math.random()*350);
   var newLeft = Math.floor(Math.random()*1024);
-  var newDuration = Math.floor(Math.random()*5000);
+  var currentDuration = newDuration;
+  newDuration = (currentDuration - 10);
+  cntr++;
+  $("#counter").html(cntr);
 
-  if (cntr >= 500) {
-    newDuration = 0;
-    console.log("Setting newDuration to zero so that the effect will stop");
-  }
+  // setTimeout(function(){
+  //   // $("#pegasusspinner").stopRotate();
+  //   cntr = 29;
+  //   newDuration = 0;
+  //   }, 15000); 
 
-  $(aobj).animate({
+    if (cntr < 30) {
+    $(aobj).animate({
       deg: 360 * 40,
       top: newTop,
       left: newLeft,
       }, newDuration, function() {
-        movespinner(aobj, cntr);
-        //rotate(deg);
+
+        if (cntr >= 30) {
+          $("#pegasusspinner").stopRotate();
+          newDuration = 0;    
+          console.log("Setting newDuration to zero so that the effect will stop");
+        } else {
+          // Keep spinning
+          movespinner(aobj, cntr);     
+        }
       });
-
-      //TODO: figure out how to stop the movement after a set moment of time
+    } else {
+      $("#pegasusspinner").stopRotate();
+    }
 }
-
-$.fn.animateRotate = function(angle, duration, easing, complete) {
-    var args = $.speed(duration, easing, complete);
-    var step = args.step;
-    return this.each(function(i, e) {
-        args.step = function(now) {
-            $.style(e, 'transform', 'rotate(' + now + 'deg)');
-            if (step) return step.apply(this, arguments);
-        };
-
-        $({deg: 0}).animate({deg: angle}, args);
-        spinme($("#pegasusspinner"));
-    });
-    
-};
 
 $(function(){
     $("#button").click(function(){
-      //for (let i=0; i<10; i++) {
-        $(".test").animateRotate(360, 3000, "linear", function(){
-            console.log(this); //this is supposed to be the DOM node, but it isn't
-        });
-        // $(".test").animateRotate(90, 2000, "linear", function(){
-        //     console.log(this); //this is supposed to be the DOM node, but it isn't
-        // });        
-      //}
+      spinme($("#pegasusspinner"));
     });   
 });
 
@@ -184,14 +156,8 @@ var rotation = function (){
         // t: current time, b: begInnIng value, c: change In value, d: duration
         return c*(t/d)+b;
       }
-  });
-  setTimeout(function(){
-        $("#pegasusspinner").stopRotate();
-      }, 15000);  
+  }); 
 }
-
-//rotation();
-//movespinner($("#pegasusspinner"), 0);
 </script>
 
 </body>
