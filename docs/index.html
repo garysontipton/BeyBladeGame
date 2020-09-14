@@ -4,24 +4,25 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Draven's Beyblade Game</title>
-	<!-- <link rel="stylesheet" href="jquery-ui.css"> -->
-	<style>
+	<script src="../jquery.min.js"></script>
+	<script src="../jQueryRotate.js"></script>  
+  <style>
 
 .dragon {
-  background-image: url("dragonBeyblade.jfif");
+  background-image: url("../dragonBeyblade.jfif");
   height: 100px;
   width: 100px;
   top: 0px;
 }
 .pegasus {
-  background-image: url("pegasusBeyblade.jfif");
+  background-image: url("../pegasusBeyblade.jfif");
   height: 100px;
   width: 100px;
   top: 150px;
   left: 150px;
 }
 .genericBeyblade {
-  background-image: url("genericBeyblade.jfif");
+  background-image: url("../genericBeyblade.jfif");
   height: 100px;
   width: 100px;
   top: 300px;
@@ -64,9 +65,7 @@ html, body {
             margin: 0;
             text-shadow: -3px 0 white, 0 3px white, 3px 0 white, 0 -3px white;
         }
-	</style>
-	<script src="./jquery.min.js"></script>
-	<script src="./jQueryRotate.js"></script>
+  </style>
 </head>
 <body>
 	<div style="width: 100%; overflow: hidden;">
@@ -76,7 +75,7 @@ html, body {
 		</div>
 	</div>
 	
-	<img Id="pegasusspinner" class="spinner" src="pegasusBeyblade.jfif" ondblclick="Javascript:spinme(this)">
+	<img Id="pegasusspinner" class="spinner" src="../pegasusBeyblade.jfif" ondblclick="Javascript:spinme(this)">
 	
 	
 	<script>
